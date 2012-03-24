@@ -87,14 +87,23 @@ void MyRobot::OperatorControl(void)
 		
 		if (joystick2->GetRawButton(LOWER_PICKUP_BUTTON)) {
 			m_pscLowerPickup->Set(BALL_DRIVE_SPEED);
-		}
+		} else {
+			m_pscLowerPickup->Set(0.0);
+        }
+
 		if (joystick2->GetRawButton(UPPER_PICKUP_BUTTON)) {
 			m_pscUpperPickup->Set(BALL_DRIVE_SPEED);
-		}
+		} else {
+            m_pscUpperPickup->Set(0.0);
+        }
+
 		if (joystick2->GetRawButton(BOTH_PICKUP_BUTTON)) {
 			m_pscLowerPickup->Set(BALL_DRIVE_SPEED);
 			m_pscUpperPickup->Set(BALL_DRIVE_SPEED);
-		}
+		} else {
+			m_pscLowerPickup->Set(0.0);
+			m_pscUpperPickup->Set(0.0);
+        }
 	}
 }
 
