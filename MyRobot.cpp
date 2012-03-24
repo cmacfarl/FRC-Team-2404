@@ -1,5 +1,6 @@
 #include "WPILib.h"
 #include "MyRobot.h"
+#include <CanJaguar.h>
 
 double limit(double val, double min = -1, double max = 1)
 {
@@ -16,8 +17,8 @@ MyRobot::MyRobot(void)
 	, m_pscLeft2(new CANJaguar (12))
 	, m_pscRight1(new CANJaguar (13))
 	, m_pscRight2(new CANJaguar (14))
-	, m_pscLowerPickup(new CANJaguar(15, kSpeed))
-	, m_pscUpperPickup(new CANJaguar(16, kSpeed))
+	, m_pscLowerPickup(new CANJaguar(15, CANJaguar::kSpeed))
+	, m_pscUpperPickup(new CANJaguar(16, CANJaguar::kSpeed))
 	, joystick1(new Joystick(1))
 	, joystick2(new Joystick(2))
 {
@@ -34,7 +35,7 @@ MyRobot::MyRobot(void)
 	m_pscRight2->ConfigNeutralMode(CANJaguar::kNeutralMode_Coast);
 	
 	m_pscLowerPickup->ConfigMaxOutputVoltage(12.0);
-	m_pscUpperPickup->ContigMaxOutputVoltage(12.0);
+	m_pscUpperPickup->ConfigMaxOutputVoltage(12.0);
 }
 
 MyRobot::~MyRobot(void)
@@ -85,14 +86,14 @@ void MyRobot::OperatorControl(void)
 		Drive(fLeft, fRight);
 		
 		if (joystick2->GetRawButton(LOWER_PICKUP_BUTTON)) {
-			m_pscLowerPickup->Set(BALL_PICKUP_DRIVE_SPEED);
+			m_pscLowerPickup->Set(BALL_DRIVE_SPEED);
 		}
 		if (joystick2->GetRawButton(UPPER_PICKUP_BUTTON)) {
-			m_pscUpperPickup->Set(BALL_PICKUP_DRIVE_SPEED);
+			m_pscUpperPickup->Set(BALL_DRIVE_SPEED);
 		}
 		if (joystick2->GetRawButton(BOTH_PICKUP_BUTTON)) {
-			m_pcsLowerPickup->Set(BALL_PICKUP_DRIVE_SPEED);
-			m_pcsUpperPickup->Set(BALL_PICKUP_DRIVE_SPEED);
+			m_pscLowerPickup->Set(BALL_DRIVE_SPEED);
+			m_pscUpperPickup->Set(BALL_DRIVE_SPEED);
 		}
 	}
 }
